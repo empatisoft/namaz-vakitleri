@@ -1,0 +1,14 @@
+{
+    "description": "Diyanet İşleri Başkanlığı'ndan aylık veya haftalık olarak namaz vakitlerini alır.",
+    "name": "empatisoft/namaz-vakitleri",
+    "type": "project",
+    "homepage": "https://empatisoft.com",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.3.8",
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^6.5",
+        "zendframework/zend-httphandlerrunner": "^1.1",
+        "psr/log": "^1.1"
+    }
+}
