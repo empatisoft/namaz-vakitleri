@@ -30,7 +30,6 @@ class Diyanet {
         libxml_clear_errors();
         $xpath = new DOMXpath($dom);
 
-        $count = 0;
         $table_rows = $xpath->query('//div[@id="tab-'.$tab.'"]//table[@class="table vakit-table"]/tbody');
         foreach($table_rows as $row => $tr) {
             foreach($tr->childNodes as $td) {
@@ -38,24 +37,22 @@ class Diyanet {
                 if(count($row_values) > 1)
                 {
                     preg_match('/(.*) (.*) (.*) (.*)/', $row_values[0], $date);
-                    $day = isset($date[1]) ? $date[1] : NULL;
-                    $month = isset($date[2]) ? $date[2] : NULL;
+                    $day = $date[1] ?? NULL;
+                    $month = $date[2] ?? NULL;
                     $month = $month != NULL ? $this->month($month) : NULL;
-                    $year = isset($date[3]) ? $date[3] : NULL;
+                    $year = $date[3] ?? NULL;
 
-                    $key = $day != NULL && $month != NULL && $year != NULL ? $year.'-'.$month.'-'.$day : $count;
-
-                    $data[$key] = array(
-                        'date' => $row_values[0],
-                        'imsak' => $row_values[1],
-                        'gunes' => $row_values[2],
-                        'ogle' => $row_values[3],
-                        'ikindi' => $row_values[4],
-                        'aksam' => $row_values[5],
-                        'yatsi' => $row_values[6]
-                    );
-
-                    $count++;
+                    $data[] = [
+                        'miladi' => $row_values[0],
+                        'hicri' => $row_values[1],
+                        'imsak' => $row_values[2],
+                        'gunes' => $row_values[3],
+                        'ogle' => $row_values[4],
+                        'ikindi' => $row_values[5],
+                        'aksam' => $row_values[6],
+                        'yatsi' => $row_values[7],
+                        'date' => $year.'-'.$month.'-'.$day
+                    ];
                 }
 
             }
